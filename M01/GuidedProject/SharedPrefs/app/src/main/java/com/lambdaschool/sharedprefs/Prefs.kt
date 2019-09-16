@@ -72,7 +72,7 @@ class Prefs (context: Context) {
         return ids
     }
     // TODO 18A read an existing entry
-    fun readALL(id: Int): JournalEntry{
+    fun readAll(id: Int): JournalEntry{
         val entryCSV = sharedPrefs.getString(STORE_KEY_PREFIX + id, "invalid") ?: " "
         return entryCSV?.let {
             JournalEntry(entryCSV)
@@ -83,14 +83,14 @@ class Prefs (context: Context) {
     fun readALL(): MutableList<JournalEntry>{
 
         val listOfIDs = getListofIDs()
-        val entryList = mutableListOf<JournalEntry>()
+        val entryList = java.util.ArrayList<JournalEntry>()
         for(id in listOfIDs){
-            entryList(id.toInt())?.let {
+            readAll(id.toInt())?.let {
                 entryList.add(it)
             }
         }
 
-    return mutableListOf()
+    return entryList
     }
 
     // TODO: 20. This is another way to define a SharedPreferences item
