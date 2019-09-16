@@ -5,9 +5,7 @@ import android.app.Application
 import timber.log.Timber
 
 // TODO: 5. Lazy initialization of a prefs object for Activities to use...
-val prefs: Prefs by lazy {
-    App.prefs!!
-}
+val prefs:Prefs = App.prefs!!
 
 // TODO: 3. Extend Timber to include class, method, line numbers!
 class MyDebugTree : Timber.DebugTree() {
