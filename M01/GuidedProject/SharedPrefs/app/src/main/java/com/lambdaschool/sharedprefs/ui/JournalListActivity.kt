@@ -43,7 +43,7 @@ class JournalListActivity : AppCompatActivity() {
         // Stretch goal: add test entries on first launch:
 //        Journal.createTestEntries(prefs)
 
-        entryList = prefs.readAllEntries()
+        entryList = prefs.readALL()
     }
 
     override fun onStart() {
