@@ -1,5 +1,6 @@
 package com.example.books
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -29,9 +30,13 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(Book.TAG, entry)
             startActivityForResult(intent, NEW_ENTRY_REQUEST)
         }
-
-
+        entryList = prefs.readAllEntries()
+        textView.removeAllViews()
+        entryList.forEach { entry->
+            textView.addView(createBookEntry(entry))
+        }
     }
+
 
         private fun createBookEntry(entry: Book): TextView {
 
@@ -45,6 +50,23 @@ class MainActivity : AppCompatActivity() {
             return view
 
         }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == NEW_ENTRY_REQUEST){
+            if(data != null){
+                val entry = data.getSerializableExtra(Book.TAG) as Book
+                entryList.add(entry)
+                prefs.createEntry(entry)
+            }
+        }else if (requestCode == EDIT_ENTRY_REQUEST){
+            if (data != null){
+                val entry = data.getSerializableExtra(Book.TAG) as Book
+                entryList[entry.id] = entry
+                prefs.updateEntry(entry)
+            }
+        }
+    }
     }
 
 

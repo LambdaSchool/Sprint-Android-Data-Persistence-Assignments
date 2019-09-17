@@ -4,15 +4,18 @@ import java.io.Serializable
 import java.lang.NumberFormatException
 
 class Book: Serializable {
-    var id: Int = 0
-    var title: String= "not looking so good"
-    var reasonToRead: String = "not looking so good"
-    var hasBeenRead: Boolean= false
-
     companion object {
         const val TAG = "BookEntry Entry"
         const val INVALID_ID = -1
     }
+
+
+    var id: Int = 0
+    var title: String? = null
+    var reasonToRead: String? = null
+    var hasBeenRead: Boolean?= false
+
+
     constructor(id: Int){
         this.id = id
         this.title = " "

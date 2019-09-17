@@ -1,8 +1,11 @@
 package com.example.books
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_edit_book.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class EditBookActivity : AppCompatActivity() {
 
@@ -13,11 +16,24 @@ class EditBookActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_book)
 
 
-        //     val intent = intent
-//        entry = intent.getSerializableExtra(Book.TAG) as Book
+        val intent = intent
+        entry = intent.getSerializableExtra(Book.TAG) as Book
 
+        entry_id_label.text = "${entry.id}"
         journal_entry_text.setText(entry.title)
 
 
+        add.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra(Book.TAG, entry)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+
+        }
+
     }
+
+
+
+
 }
