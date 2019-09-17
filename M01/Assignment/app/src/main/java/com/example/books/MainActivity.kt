@@ -11,6 +11,11 @@ import com.example.books.BookData.Companion.createBookEntry
 import kotlinx.android.synthetic.main.activity_main.*
 
 
+
+/*this is the last successful commit where the app worked without any errors.
+cannot assign any textviews yet and continue the polish*/
+
+
 class MainActivity : AppCompatActivity() {
     companion object {
         const val NEW_ENTRY_REQUEST = 2
