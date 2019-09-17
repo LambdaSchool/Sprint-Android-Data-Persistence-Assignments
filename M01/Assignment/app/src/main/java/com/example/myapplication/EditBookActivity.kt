@@ -44,7 +44,6 @@ class EditBookActivity : AppCompatActivity() {
                     edit_title.text.toString(), edit_reason.text.toString(),
                     if (checkBox.isChecked) Book.HAS_BEEN_READ else Book.HAS_NOT_BEEN_READ, it)
 
-                Log.i("NOW", "HERE")
                 val intent = Intent()
                 intent.putExtra(Book.CSV_STRING_ID, book.toCsvString())
                 setResult(Activity.RESULT_OK, intent)

@@ -31,26 +31,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
         if(resultCode == Activity.RESULT_OK){
             val s = data?.getStringExtra(Book.CSV_STRING_ID)
             s?.let{
-                layout_book_entry.addView(buildItemView(Book(it), this))
+                layout_book_entry.addView(buildItemView(Book(it)))
             }
         } else{
         }
-        
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun buildItemView(book: Book, context: Context) : CustomBookEntry{
-        val entry = CustomBookEntry(context, book)
+    fun buildItemView(book: Book) : CustomBookEntry{
+
+        val entry = CustomBookEntry(this, book)
         entry.setOnClickListener {
-            layout_book_entry.removeViewAt(book.id.toInt())
-            val intent = Intent(context, EditBookActivity::class.java)
-            intent.putExtra(MainActivity.BOOK_ID, book.id)
+            val intent = Intent(this, EditBookActivity::class.java)
+            intent.putExtra(BOOK_ID, book.id)
             intent.putExtra(Book.CSV_STRING_ID, book.toCsvString())
-            context.startActivity(intent)
+            startActivity(intent)
         }
         return entry
     }
