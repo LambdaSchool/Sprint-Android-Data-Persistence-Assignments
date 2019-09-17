@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 
 class Book() {
     lateinit var title: String
@@ -13,17 +14,6 @@ class Book() {
         const val HAS_BEEN_READ = "Has been read"
         const val HAS_NOT_BEEN_READ = "Has not been read"
         const val CSV_STRING_ID = "CSV STRING ID"
-
-        //returns a custom textview displaying book title
-        fun buildItemView(book: Book, context: Context) : CustomBookEntry{
-            val entry = CustomBookEntry(context, book)
-            entry.setOnClickListener {
-                val intent = Intent(context, EditBookActivity::class.java)
-                intent.putExtra(CSV_STRING_ID, book.toCsvString())
-                context.startActivity(intent)
-            }
-            return entry
-        }
     }
 
     constructor(title: String, reasonToRead: String, hasBeenRead: String, id: String) : this(){
@@ -43,6 +33,7 @@ class Book() {
     }
 
     fun toCsvString(): String{
+        Log.i("HEre", "$hasBeenRead")
         return "$title,$reasonToRead,${hasBeenRead},$id"
     }
 }

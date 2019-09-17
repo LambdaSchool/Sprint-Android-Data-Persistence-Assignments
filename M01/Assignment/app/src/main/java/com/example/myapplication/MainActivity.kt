@@ -23,14 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences = this.getSharedPreferences("entry details", Context.MODE_PRIVATE)
 
-        val b = Book("The Great Gatsby", "Cool",Book.HAS_BEEN_READ, "123")
-        val b1 = Book("Harry Potter", "Nerdy", Book.HAS_BEEN_READ, "124")
-        val b2 = Book("The Chronicles of Riddick", "Exciting", Book.HAS_NOT_BEEN_READ, "36")
-
-//        layout_book_entry.addView(Book.buildItemView(b, this))
-//        layout_book_entry.addView(Book.buildItemView(b1, this))
-//        layout_book_entry.addView(Book.buildItemView(b2, this))
-
         btn_add.setOnClickListener {
             val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra(BOOK_ID, layout_book_entry.childCount.toString())
@@ -39,16 +31,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.i("HI", "HERE")
+
         if(resultCode == Activity.RESULT_OK){
-            Log.i("GOT ", "HERE")
             val s = data?.getStringExtra(Book.CSV_STRING_ID)
             s?.let{
-                layout_book_entry.addView(Book.buildItemView(Book(it), this))
+                layout_book_entry.addView(buildItemView(Book(it), this))
             }
         } else{
-            Toast.makeText(this, "Not able to add book", Toast.LENGTH_SHORT).show()
         }
+        
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun buildItemView(book: Book, context: Context) : CustomBookEntry{
+        val entry = CustomBookEntry(context, book)
+        entry.setOnClickListener {
+            layout_book_entry.removeViewAt(book.id.toInt())
+            val intent = Intent(context, EditBookActivity::class.java)
+            intent.putExtra(MainActivity.BOOK_ID, book.id)
+            intent.putExtra(Book.CSV_STRING_ID, book.toCsvString())
+            context.startActivity(intent)
+        }
+        return entry
     }
 }
