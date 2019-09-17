@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="172dp"
             android:gravity="top|start"
+            android:text="I AM RIGHT HERE"
             android:hint="BOOK ENTRY"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"

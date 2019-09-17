@@ -2,10 +2,8 @@ package com.example.books
 
 import android.app.Application
 import timber.log.Timber
+ var prefs: Prefs = App.prefs!!
 
-val prefs: Prefs by lazy {
-    App.prefs!!
-}
 
 // TODO: 3. Extend Timber to include class, method, line numbers!
 class MyDebugTree : Timber.DebugTree() {

@@ -49,7 +49,7 @@ class Prefs (context: Context) {
 
     fun readOneEntry(id: Int): Book {
         val entryCSV = sharedPrefs.getString(ENTRY_ITEM_KEY_PREFIX + id, "invalid") ?: " "
-        return entryCSV?.let {
+        return entryCSV.let {
             Book(entryCSV)
         }
 
@@ -61,7 +61,7 @@ class Prefs (context: Context) {
         val entryList = java.util.ArrayList<Book>()
         for (id in listOfIDs){
             if (id.isNotBlank()){
-                readOneEntry(id.toInt())?.let {
+                readOneEntry(id.toInt()).let {
                     entryList.add(it)
                 }
             }

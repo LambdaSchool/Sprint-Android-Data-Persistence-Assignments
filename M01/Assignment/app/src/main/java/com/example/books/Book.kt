@@ -11,9 +11,9 @@ class Book: Serializable {
 
 
     var id: Int = 0
-    var title: String? = null
+    var title: String?
     var reasonToRead: String? = null
-    var hasBeenRead: Boolean?= false
+    var hasBeenRead: Boolean= false
 
 
     constructor(id: Int){
@@ -24,7 +24,7 @@ class Book: Serializable {
     }
     constructor(csvString: String){
         val values = csvString.split(", ")
-        if (values.size == 5)
+        if (values.size == 15)
             try {
                 this.id = Integer.parseInt(values[0])
             }catch (e: NumberFormatException){
