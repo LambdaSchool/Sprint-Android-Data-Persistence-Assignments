@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -38,7 +39,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.i("HI", "HERE")
         if(resultCode == Activity.RESULT_OK){
+            Log.i("GOT ", "HERE")
             val s = data?.getStringExtra(Book.CSV_STRING_ID)
             s?.let{
                 layout_book_entry.addView(Book.buildItemView(Book(it), this))
@@ -47,5 +50,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Not able to add book", Toast.LENGTH_SHORT).show()
         }
         super.onActivityResult(requestCode, resultCode, data)
+
     }
 }

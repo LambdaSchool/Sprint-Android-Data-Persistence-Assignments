@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_edit_book.*
 
 class EditBookActivity : AppCompatActivity() {
@@ -21,8 +22,9 @@ class EditBookActivity : AppCompatActivity() {
         }
 
         button_cancel.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent()
             setResult(Activity.RESULT_CANCELED, intent)
+            startActivityForResult(intent, Activity.RESULT_CANCELED)
             finish()
         }
     }
@@ -34,9 +36,10 @@ class EditBookActivity : AppCompatActivity() {
                     edit_title.text.toString(), edit_reason.text.toString(),
                     if (checkBox.isChecked) Book.HAS_BEEN_READ else Book.HAS_NOT_BEEN_READ, it)
 
-                val intent = Intent(this, MainActivity::class.java)
+                Log.i("NOW", "HERE")
+                val intent = Intent()
                 intent.putExtra(Book.CSV_STRING_ID, book.toCsvString())
-                setResult(Activity.RESULT_OK, intent)
+                startActivityForResult(intent, Activity.RESULT_OK)
                 finish()
             }
         }

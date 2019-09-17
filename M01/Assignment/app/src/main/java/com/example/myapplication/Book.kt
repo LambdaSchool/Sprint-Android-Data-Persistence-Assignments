@@ -14,7 +14,7 @@ class Book() {
         const val HAS_NOT_BEEN_READ = "Has not been read"
         const val CSV_STRING_ID = "CSV STRING ID"
 
-        //returns a custom view that
+        //returns a custom textview displaying book title
         fun buildItemView(book: Book, context: Context) : CustomBookEntry{
             val entry = CustomBookEntry(context, book)
             entry.setOnClickListener {
@@ -45,6 +45,4 @@ class Book() {
     fun toCsvString(): String{
         return "$title,$reasonToRead,${hasBeenRead},$id"
     }
-
-
 }
