@@ -19,8 +19,8 @@ class EditBookActivity : AppCompatActivity() {
         val intent = intent
        entry = intent.getSerializableExtra(Book.TAG) as Book
 
-        entry_id_label.text = "${entry.id}"
-        journal_entry_text.setText("I AAM RIGHT HERE")
+        entry_id_label.setText("${entry.id}")
+        journal_entry_text.setText("${entry.title}, ${entry.reasonToRead}, ${entry.hasBeenRead}")
 
 
         add.setOnClickListener {

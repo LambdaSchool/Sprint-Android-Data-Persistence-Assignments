@@ -54,7 +54,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/entry_id_label" />
 
-        <TextView
+        <EditText
             android:id="@+id/entry_id_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
