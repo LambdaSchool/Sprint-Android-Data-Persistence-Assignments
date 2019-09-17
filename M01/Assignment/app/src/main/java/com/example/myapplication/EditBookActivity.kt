@@ -10,12 +10,21 @@ import kotlinx.android.synthetic.main.activity_edit_book.*
 class EditBookActivity : AppCompatActivity() {
 
     var idString: String? = null
+    var csvString: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_book)
 
         idString = intent.getStringExtra(MainActivity.BOOK_ID)
+        csvString = intent.getStringExtra(Book.CSV_STRING_ID)
+
+        csvString?.let{
+            val s = it.split(",")
+            edit_title.setText(s[0])
+            edit_reason.setText(s[1])
+            if(s[3] == Book.HAS_BEEN_READ) checkBox.isChecked = true else checkBox.isChecked = false
+        }
 
         button_submit.setOnClickListener {
             returnData() //only goes back to main activity if theres input
@@ -24,7 +33,6 @@ class EditBookActivity : AppCompatActivity() {
         button_cancel.setOnClickListener {
             val intent = Intent()
             setResult(Activity.RESULT_CANCELED, intent)
-            startActivityForResult(intent, Activity.RESULT_CANCELED)
             finish()
         }
     }
@@ -39,7 +47,7 @@ class EditBookActivity : AppCompatActivity() {
                 Log.i("NOW", "HERE")
                 val intent = Intent()
                 intent.putExtra(Book.CSV_STRING_ID, book.toCsvString())
-                startActivityForResult(intent, Activity.RESULT_OK)
+                setResult(Activity.RESULT_OK, intent)
                 finish()
             }
         }

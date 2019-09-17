@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         btn_add.setOnClickListener {
             val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra(BOOK_ID, layout_book_entry.childCount.toString())
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
     }
 
@@ -50,6 +50,5 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Not able to add book", Toast.LENGTH_SHORT).show()
         }
         super.onActivityResult(requestCode, resultCode, data)
-
     }
 }

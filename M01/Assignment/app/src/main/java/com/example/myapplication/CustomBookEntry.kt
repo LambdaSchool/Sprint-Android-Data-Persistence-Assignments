@@ -12,6 +12,6 @@ class CustomBookEntry(context: Context, val book: Book) : TextView(context){
         setBackgroundColor(Color.RED)
         setTextColor(Color.WHITE)
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-        setPadding(10, 0, 10, 0)
+        setPadding(10, 10, 10, 10)
     }
 }
