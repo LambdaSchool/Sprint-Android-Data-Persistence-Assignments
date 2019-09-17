@@ -18,10 +18,11 @@ class Book() {
         fun buildItemView(book: Book, context: Context) : CustomBookEntry{
             val entry = CustomBookEntry(context, book)
             entry.setOnClickListener {
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, EditBookActivity::class.java)
                 intent.putExtra(CSV_STRING_ID, book.toCsvString())
                 context.startActivity(intent)
             }
+            return entry
         }
     }
 
