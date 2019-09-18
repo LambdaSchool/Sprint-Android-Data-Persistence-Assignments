@@ -127,9 +127,7 @@ class BookRepo (var context: Context): BookRepoInterface{
     }
 
     override fun updateEntry(entry: Book) {
-        val updateEntryString = entry.toJsonObject()
-        val filename = entry.title + ".json"
-        writeToFile(filename, updateEntryString.toString())
+        return updateEntry(entry)
 
     }
 
