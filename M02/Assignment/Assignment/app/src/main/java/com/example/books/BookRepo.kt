@@ -46,7 +46,7 @@ class BookRepo (var context: Context): BookRepoInterface{
 
     }
     // TODO 9: Save storage directory as a member variable
-    val storageDirectory: File
+    private val storageDirectory: File
     get() {
         if (isExternalStorageWritable){
             val directory = context.filesDir
@@ -61,7 +61,7 @@ class BookRepo (var context: Context): BookRepoInterface{
         }
     }
     // TODO 10: Check for external storage is writeable
-    val isExternalStorageWritable: Boolean
+    private val isExternalStorageWritable: Boolean
     get() {
         //get the state from the environment you re working on
         val state = Environment.getExternalStorageState()
@@ -123,11 +123,11 @@ class BookRepo (var context: Context): BookRepoInterface{
                 }
             }
         }
-        return readString ?: " "
+        return readString ?: ""
     }
 
     override fun updateEntry(entry: Book) {
-        return updateEntry(entry)
+
 
     }
 
