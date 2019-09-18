@@ -75,7 +75,9 @@ class BookRepo (var context: Context): BookRepoInterface{
         for (filename in fileList) { //fileList will be saved as member var few lines later
             val json = readFromFile(filename) //same as fileList(will be passed later as helper fun)
             try {
-                entries.add(Book(JSONObject(json)))
+                val jsonObject = JSONObject(json)
+                val element = Book(jsonObject)
+                entries.add(element)
             } catch (e: JSONException) {
                 e.printStackTrace()
             }

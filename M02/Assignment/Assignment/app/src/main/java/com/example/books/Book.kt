@@ -34,17 +34,17 @@ class Book: Serializable {
         }
         try {
             this.title = jsonObject.getString("title")
-        }catch (e: IOException){
+        }catch (e: JSONException){
             this.title = " "
         }
         try {
-            this.reasonToRead = jsonObject.getString("reason to watch")
-        }catch (e: IOException){
+            this.reasonToRead = jsonObject.getString("reasonToRead")//this end has to match what ever this as constant would be.
+        }catch (e: JSONException){
             this.reasonToRead = " "
         }
         try {
-            this.hasBeenRead = jsonObject.getBoolean("has been read")
-        }catch (e: IOException){
+            this.hasBeenRead = jsonObject.getBoolean("hasBeenRead")
+        }catch (e: JSONException){
             this.hasBeenRead = false
         }
     }
