@@ -1,22 +1,18 @@
 package com.example.myapplication
 
-import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 
-class SharedPreferencesDAO(activity: AppCompatActivity, prefName: String) {
+object SharedPreferencesDao {
 
-    var sharedPreferences: SharedPreferences = activity.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+    var sharedPreferences: SharedPreferences? = null // this will be set by the activity
 
-    companion object{
-        const val BOOK_ENTRY = "BOOK_ENTRY"
-        const val ID_NOT_FOUND = "NOT FOUND"
-    }
+    const val BOOK_ENTRY = "BOOK_ENTRY"
+    const val ID_NOT_FOUND = "NOT FOUND"
 
     fun createEntry(book: Book){
-        val editor = sharedPreferences.edit()
-        editor.putString(BOOK_ENTRY + book.id, book.toCsvString())
-        editor.apply()
+        val editor = sharedPreferences?.edit()
+        editor?.putString(BOOK_ENTRY + book.id, book.toCsvString())
+        editor?.apply()
     }
 
     fun updateEntry(book: Book){ //modifies the entry for this book
@@ -25,11 +21,11 @@ class SharedPreferencesDAO(activity: AppCompatActivity, prefName: String) {
     }
 
     fun getEntry(id: String): String{ //so if the string returned is null, then it will create a null-pointer error, if its
-        return sharedPreferences.getString(BOOK_ENTRY+id, ID_NOT_FOUND) ?: ID_NOT_FOUND
+        return sharedPreferences?.getString(BOOK_ENTRY+id, ID_NOT_FOUND) ?: ID_NOT_FOUND
     }
 
     fun getAllEntries(): ArrayList<String>? {
-        val entryMap = sharedPreferences.all //returns a mutable map of all string value pairs
+        val entryMap = sharedPreferences?.all //returns a mutable map of all string value pairs
         if(!entryMap.isNullOrEmpty()) {
             val bookCsvList = ArrayList<String>(entryMap.size)
 
