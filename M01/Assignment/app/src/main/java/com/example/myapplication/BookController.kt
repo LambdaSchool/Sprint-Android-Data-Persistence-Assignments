@@ -3,18 +3,15 @@ package com.example.myapplication
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.appcompat.widget.LinearLayoutCompat
-import kotlinx.android.synthetic.main.activity_main.*
 
 class BookController {
 
-    fun buildItemView(bookLayout: LinearLayout?, book: Book) : CustomBookEntry? {
+    private fun buildItemView(bookLayout: LinearLayout?, book: Book) : CustomBookEntry? {
         val context = bookLayout?.context
 
         if(context != null) {
-            val entry = CustomBookEntry(it, book)
+            val entry = CustomBookEntry(context, book)
             entry.setOnClickListener {
                 bookLayout.removeViewAt(book.id.toInt())
                 val intent = Intent(context, EditBookActivity::class.java)
@@ -43,7 +40,7 @@ class BookController {
         return null
     }
 
-    fun handleEditActivityResult(linearLayout: LinearLayout?, intent: Intent){
+    fun handleEditActivityResult(linearLayout: LinearLayout?, intent: Intent?){
         val s = intent?.getStringExtra(Book.CSV_STRING_ID)
         s?.let{
             linearLayout?.addView(buildItemView(linearLayout, Book(it)))
