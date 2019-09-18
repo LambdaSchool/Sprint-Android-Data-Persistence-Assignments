@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(Book.TAG, entry)
             startActivityForResult(intent, NEW_ENTRY_REQUEST)
         }
-        entryList = prefs.readAllEntries()
+        entryList = repo.readAllEntries()
         textView.removeAllViews()
         entryList.forEach { entry->
             textView.addView(createBookEntry(entry))
@@ -62,14 +62,14 @@ class MainActivity : AppCompatActivity() {
             if(data != null){
                 val entry = data.getSerializableExtra(Book.TAG) as Book
                 entryList.add(entry)
-                prefs.createEntry(entry)
+                repo.createEntry(entry)
                 textView.addView(createBookEntry(entry))
             }
         }else if (requestCode == EDIT_ENTRY_REQUEST){
             if (data != null){
                 val entry = data.getSerializableExtra(Book.TAG) as Book
                 entryList[entry.id] = entry
-                prefs.updateEntry(entry)
+                repo.updateEntry(entry)
             }
         }
     }
