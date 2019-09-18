@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        scroll_book_entry.addView(bookController.getBooksView(this))
+        SharedPreferencesDao.sharedPreferences = getSharedPreferences("ENTRIES", Context.MODE_PRIVATE)
+        linearLayout = bookController.getBooksView(this)
+        scroll_book_entry.addView(linearLayout)
 
         btn_add.setOnClickListener {
             linearLayout?.let {

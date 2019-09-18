@@ -26,18 +26,16 @@ class BookController {
 
     fun getBooksView(context: Context): LinearLayout?{
         val bookList = BooksModel().getAllBooks()
+        val layout = LinearLayout(context)
+        layout.setLayoutParams(LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+        layout.orientation = LinearLayout.VERTICAL
 
         bookList?.let{
-            val layout = LinearLayout(context)
-            layout.setLayoutParams(LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
-            layout.orientation = LinearLayout.VERTICAL
-
             it.forEach {
                 layout.addView(buildItemView(layout, Book(it)))
             }
-            return layout
         }
-        return null
+        return layout
     }
 
     fun handleEditActivityResult(linearLayout: LinearLayout?, intent: Intent?){
