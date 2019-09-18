@@ -8,12 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.size
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     companion object{
-        var sharedPreferences: SharedPreferences? = null
+        var sharedPreferences: SharedPreferencesDAO? = null
         const val BOOK_ID = "BOOK ID"
     }
 
@@ -21,7 +22,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sharedPreferences = this.getSharedPreferences("entry details", Context.MODE_PRIVATE)
+        //shared preferences for main activity
+        sharedPreferences = SharedPreferencesDAO(this, "ENTRIES")
+
+        sharedPreferences?.getAllEntries()?.let{
+            it.forEach {
+                layout_book_entry.addView(buildItemView(Book(it)))
+            }
+        }
 
         btn_add.setOnClickListener {
             val intent = Intent(this, EditBookActivity::class.java)
@@ -35,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             val s = data?.getStringExtra(Book.CSV_STRING_ID)
             s?.let{
                 layout_book_entry.addView(buildItemView(Book(it)))
+                sharedPreferences?.createEntry(Book(it))
             }
         } else{
         }
@@ -45,10 +54,11 @@ class MainActivity : AppCompatActivity() {
 
         val entry = CustomBookEntry(this, book)
         entry.setOnClickListener {
+            layout_book_entry.removeViewAt(book.id.toInt())
             val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra(BOOK_ID, book.id)
             intent.putExtra(Book.CSV_STRING_ID, book.toCsvString())
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
         return entry
     }

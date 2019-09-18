@@ -19,11 +19,13 @@ class EditBookActivity : AppCompatActivity() {
         idString = intent.getStringExtra(MainActivity.BOOK_ID)
         csvString = intent.getStringExtra(Book.CSV_STRING_ID)
 
+        Log.i("BOOKID", "$idString")
+
         csvString?.let{
             val s = it.split(",")
             edit_title.setText(s[0])
             edit_reason.setText(s[1])
-            if(s[3] == Book.HAS_BEEN_READ) checkBox.isChecked = true else checkBox.isChecked = false
+            if(s[2] == Book.HAS_BEEN_READ) checkBox.isChecked = true else checkBox.isChecked = false
         }
 
         button_submit.setOnClickListener {
