@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import java.lang.StringBuilder
 
-class Prefs (context: Context) {
+//TODO 2 extending to Repo class and adding overrides
+
+class Prefs (context: Context): BookRepoInterface {
     companion object {
         private const val BOOK_PREFERENCE = "Book Preference!"
         private const val ID_LIST_KEY = "id_list"
@@ -15,7 +17,7 @@ class Prefs (context: Context) {
     val sharedPrefs: SharedPreferences =
         context.getSharedPreferences(BOOK_PREFERENCE, Context.MODE_PRIVATE)
 
-    fun createEntry(entry: Book) {
+    override fun createEntry(entry: Book) {
         val ids = getListofIDs()
         if (!ids.contains(entry.id.toString())) {
             val editor = sharedPrefs.edit()
@@ -63,7 +65,7 @@ class Prefs (context: Context) {
 
     }
 
-    fun readAllEntries(): MutableList<Book> {
+   override fun readAllEntries(): MutableList<Book> {
         val listOfIDs = getListofIDs()
 
         val entryList = java.util.ArrayList<Book>()
@@ -77,7 +79,7 @@ class Prefs (context: Context) {
         return entryList
 
     }
-    fun updateEntry(entry: Book){
+  override  fun updateEntry(entry: Book){
         val editor = sharedPrefs.edit()
         editor.putString(ENTRY_ITEM_KEY_PREFIX + entry.id, entry.toCSVString())
         editor.apply()
