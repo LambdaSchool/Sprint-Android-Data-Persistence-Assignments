@@ -16,6 +16,9 @@ class BookDBRepo (context: Context) : BookRepoInterface{
     override fun updateEntry(entry: Book) {
         database.entriesDao().updateEntry(entry)
     }
+    override fun deleteEntry(entry: Book){
+        database.entriesDao().deleteEntry(entry)
+    }
 
 
     private val context2 = context.applicationContext

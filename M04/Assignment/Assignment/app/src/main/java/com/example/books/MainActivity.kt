@@ -38,10 +38,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         //getting the view model here
         viewModel = ViewModelProviders.of(this).get(EntriesViewModel::class.java)
 
-        button.setOnClickListener { view ->
+        button.setOnClickListener {
             val intent = Intent(this@MainActivity, EditBookActivity::class.java)
             val entry = createBookEntry()
             intent.putExtra(Book.TAG, entry)
@@ -61,11 +63,19 @@ class MainActivity : AppCompatActivity() {
             textView.addView(createBookEntry(entry))
         }
     }
+  // private fun deleteEntries(entries: List<Book>){
+  //     textView.setOnLongClickListener {
+  //         textView.removeAllViews()
+
+  //     true
+  //     }
+
+  // }
 
     private fun createBookEntry(entry: Book): TextView {
 
 
-        val view = TextView(this@MainActivity)
+        var view = TextView(this@MainActivity)
 
 
         view.text = "${entry.id}, ${entry.reasonToRead}, ${entry.title}, ${entry.hasBeenRead}"

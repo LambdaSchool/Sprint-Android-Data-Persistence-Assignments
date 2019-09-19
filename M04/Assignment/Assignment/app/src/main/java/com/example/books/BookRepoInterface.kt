@@ -7,4 +7,5 @@ interface BookRepoInterface{
     fun createEntry(entry: Book)
     fun readAllEntries(): LiveData<List<Book>>
     fun updateEntry(entry: Book)
+    fun deleteEntry(entry: Book)
 }

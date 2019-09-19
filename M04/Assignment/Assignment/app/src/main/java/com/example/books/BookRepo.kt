@@ -11,6 +11,9 @@ import java.io.*
 //TODO 3: Imlement the repo interface into the new book repo class
 
 class BookRepo (var context: Context): BookRepoInterface{
+    override fun deleteEntry(entry: Book) {
+        deleteEntry(entry)
+    }
 
     //TODO 4: added all members and implementing create entry now
     override fun createEntry(entry: Book) {

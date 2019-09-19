@@ -9,6 +9,10 @@ import java.lang.StringBuilder
 //TODO 2 extending to Repo class and adding overrides
 
 class Prefs (context: Context): BookRepoInterface {
+    override fun deleteEntry(entry: Book) {
+        deleteEntry(entry)
+    }
+
     companion object {
         private const val BOOK_PREFERENCE = "Book Preference!"
         private const val ID_LIST_KEY = "id_list"
