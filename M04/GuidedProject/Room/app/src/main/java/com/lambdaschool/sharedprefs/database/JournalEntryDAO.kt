@@ -5,6 +5,22 @@ import androidx.room.*
 import com.lambdaschool.sharedprefs.model.JournalEntry
 
 // TODO 9: Let's define the DAO with methods from our repo interface
+@Dao
+interface JournalEntryDAO{
+    @Insert(onConflict = OnConflictStrategy.REPLACE)// to avoid conflict
+     fun createEntry(entry: JournalEntry)
+
+    @Query("SELECT * FROM journalentry" )
+     fun readAllEntries(): LiveData<List<JournalEntry>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+     fun updateEntry(entry: JournalEntry)
+@Delete
+     fun deleteEntry(entry: JournalEntry)
+
+
+
+}
 
     // TODO 10: Insert with onConflict = REPLACE
     // TODO 11: Query for all entities
