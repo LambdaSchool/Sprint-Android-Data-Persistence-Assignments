@@ -134,7 +134,7 @@ class BookRepo (var context: Context): BookRepoInterface{
 
     override fun updateEntry(entry: Book) {
 
-
+            createEntry(entry)
     }
 
 }

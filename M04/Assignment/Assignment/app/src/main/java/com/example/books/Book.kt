@@ -1,5 +1,6 @@
 package com.example.books
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.json.JSONException
 import org.json.JSONObject
@@ -7,9 +8,10 @@ import java.io.IOException
 import java.io.Serializable
 import java.lang.NumberFormatException
 
+@Entity
 class Book: Serializable {
     companion object {
-        const val TAG = "BookEntry Entry"
+        const val TAG = "book_entry"
         const val INVALID_ID = 0
     }
 

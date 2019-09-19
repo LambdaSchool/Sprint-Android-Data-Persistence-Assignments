@@ -2,6 +2,8 @@ package com.example.books
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import java.lang.StringBuilder
 
 //TODO 2 extending to Repo class and adding overrides
@@ -65,7 +67,7 @@ class Prefs (context: Context): BookRepoInterface {
 
     }
 
-   override fun readAllEntries(): MutableList<Book> {
+   override fun readAllEntries(): LiveData<List<Book>> {
         val listOfIDs = getListofIDs()
 
         val entryList = java.util.ArrayList<Book>()
@@ -76,7 +78,9 @@ class Prefs (context: Context): BookRepoInterface {
                 }
             }
         }
-        return entryList
+        val liveData = MutableLiveData<List<Book>>()
+       liveData.postValue(entryList)
+       return liveData
 
     }
   override  fun updateEntry(entry: Book){

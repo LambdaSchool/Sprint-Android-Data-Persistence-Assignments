@@ -8,7 +8,7 @@ interface BookEntryDAO{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun createEntry(entry: Book)
 
-    @Query("select * from entry_database")
+    @Query("select * from book")
     fun readAllEntries(): LiveData<List<Book>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
