@@ -1,5 +1,6 @@
 package com.example.books
 
+import androidx.room.PrimaryKey
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -9,15 +10,18 @@ import java.lang.NumberFormatException
 class Book: Serializable {
     companion object {
         const val TAG = "BookEntry Entry"
-        const val INVALID_ID = 1
+        const val INVALID_ID = 0
     }
 
 
-    var id: Int =0
+   // var id: Int =0
     var title: String?
     var reasonToRead: String? = null
     var hasBeenRead: Boolean= false
 
+    //generate primary key
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 
     constructor(id: Int){
         this.id = id
