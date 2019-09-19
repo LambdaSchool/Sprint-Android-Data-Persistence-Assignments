@@ -34,7 +34,9 @@ class App : Application() {
         super.onCreate()
 
      //   prefs = Prefs(applicationContext)
-        repo = BookRepo(applicationContext)
+    //    repo = BookRepo(applicationContext)
+      repo = BookDBRepo(applicationContext)
+
         // TODO: 2. Configure Timber logging
         // "Timber" Library
         if (BuildConfig.DEBUG) {

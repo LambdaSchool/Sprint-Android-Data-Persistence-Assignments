@@ -2,6 +2,8 @@ package com.example.books
 
 import android.content.Context
 import android.os.Environment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.*
@@ -69,7 +71,7 @@ class BookRepo (var context: Context): BookRepoInterface{
     }
 
 
-    override fun readAllEntries(): MutableList<Book> {
+    override fun readAllEntries(): LiveData<List<Book>> {
         //TODO 10 B : get a file list and set up an array for that list
         val entries = ArrayList<Book>()
         for (filename in fileList) { //fileList will be saved as member var few lines later
@@ -82,7 +84,9 @@ class BookRepo (var context: Context): BookRepoInterface{
                 e.printStackTrace()
             }
         }
-        return entries
+        val liveData = MutableLiveData<List<Book>>()
+        liveData.postValue(entries)
+        return liveData
     }
     // TODO 12 Save the list as member var
     // returns file list as string
